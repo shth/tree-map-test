@@ -1,24 +1,33 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import "./App.css";
+import TreeMap from "./components/TreeMap";
 
 function App() {
+  const [rows, setRows] = useState("3");
+  const [jsonData, setJsonData] = useState("{}");
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div className="tree-map-container">
+        <div>
+          <div>
+            <label>Data:</label>
+          </div>
+          <div>
+            <textarea onChange={(e) => setJsonData(e.target.value)}></textarea>
+          </div>
+          <div>
+            <label>Row Number:</label>
+          </div>
+          <div>
+            <input type="number" onChange={(e) => setRows(e.target.value)}></input>
+          </div>
+        </div>
+        <div>
+          <label>Result: </label>
+          <TreeMap rows={rows} data={jsonData}></TreeMap>
+        </div>
+      </div>
     </div>
   );
 }
