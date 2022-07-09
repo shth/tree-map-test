@@ -1,7 +1,5 @@
-.App {
-}
-
 .tree-map-container {
+  width: 100%;
   background-color: #282c34;
   display: flex;
   flex-direction: row;
@@ -9,4 +7,14 @@
   justify-content: center;
   font-size: 14px;
   color: white;
+}
+
+.tree-map-container > div{
+  width: 100%;
+}
+
+@media (max-width: 840px) {
+  .tree-map-container {
+    flex-direction: column;
+  }
 }

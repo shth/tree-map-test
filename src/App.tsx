@@ -10,7 +10,7 @@ function App() {
   return (
     <div className="App">
       <div className="tree-map-container">
-        <div style={{ alignSelf: "start", flexGrow: 1, marginRight: 20 }}>
+        <div style={{ marginRight: 20 }}>
           <div>
             <label>Row Number:</label>
           </div>
