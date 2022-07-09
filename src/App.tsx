@@ -47,7 +47,9 @@ function App() {
         </div>
         <div>
           <label>Result: </label>
-          <TreeMap rows={rows} data={jsonData}></TreeMap>
+          <ErrorBoundary key={jsonData}>
+            <TreeMap rows={rows} data={jsonData}></TreeMap>
+          </ErrorBoundary>
         </div>
       </div>
     </div>

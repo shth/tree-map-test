@@ -51,11 +51,9 @@ function getTreeMap(array: TreeMapItem[], rows: number) {
 }
 
 function TreeMap(props: any) {
-  // TODO: implement packing algorithm
-  // https://cgi.csc.liv.ac.uk/~epa/surveyhtml.html
   return (
     <div style={{ width: 800, height: 800, backgroundColor: "white", color: "black" }}>
-      {getTreeMap(props.data, parseInt(props.rows)).map((level) => {
+      {getTreeMap(JSON.parse(props.data), parseInt(props.rows)).map((level) => {
         return (
           <div style={{ display: "flex" }}>
             {level.items.map((item) => {
