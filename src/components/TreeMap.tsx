@@ -91,7 +91,7 @@ function TreeMap(props: any) {
                   }}
                 >
                   <div>{item.name}</div>
-                  <div>{`${item.value * 100}%`}</div>
+                  <div>{`${parseFloat((item.value * 100).toFixed(2))}%`}</div>
                 </div>
               );
             })}
