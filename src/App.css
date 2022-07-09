@@ -3,11 +3,10 @@
 
 .tree-map-container {
   background-color: #282c34;
-  min-height: 100vh;
   display: flex;
   flex-direction: row;
-  align-items: center;
+  align-items: start;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  font-size: 14px;
   color: white;
 }
