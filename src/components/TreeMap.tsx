@@ -23,8 +23,31 @@ function getTreeMap(array: TreeMapItem[], rows: number) {
     return [];
   }
 
-  const sorted = array.sort((a, b) => b.weight - a.weight);
-  const totalWidth = sorted.reduce((result, item) => result + item.weight, 0);
+  if (array.length > 50) {
+    throw new Error("Number of items cannot exceed 50.");
+  }
+
+  if (rows > array.length) {
+    throw new Error(
+      `Number of rows cannot exceed number of items. Number of items: ${array.length}`
+    );
+  }
+
+  const sorted = array.sort((a, b) => {
+    return b.weight - a.weight;
+  });
+
+  const totalWidth = sorted.reduce((result, item) => {
+    if (typeof item.name !== "string") {
+      throw new Error(`Item name must be a string: ${JSON.stringify(item)}`);
+    } else if (item.name.length > 50) {
+      throw new Error(`Item name cannot exceed 50 characters: ${JSON.stringify(item)}`);
+    } else if (typeof item.weight !== "number" || item.weight !== Math.floor(item.weight)) {
+      throw new Error(`Item weight must be integer: ${JSON.stringify(item)}`);
+    }
+
+    return result + item.weight;
+  }, 0);
   const rowMaxWidth = calculateRowMaxWidth(rows, totalWidth);
 
   const levels: Level[] = new Array(rows).fill(null).map((_, i) => {

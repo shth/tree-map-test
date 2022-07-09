@@ -1,21 +1,24 @@
 import React, { useState } from "react";
 import "./App.css";
+import ErrorBoundary from "./components/ErrorBoundary";
 import TreeMap from "./components/TreeMap";
 
 function App() {
   const [rows, setRows] = useState(3);
-  const [jsonData, setJsonData] = useState([]);
+  const [jsonData, setJsonData] = useState("[]");
 
   return (
     <div className="App">
       <div className="tree-map-container">
-        <div>
+        <div style={{ alignSelf: "start", flexGrow: 1 }}>
           <div>
             <label>Row Number:</label>
           </div>
           <div>
             <input
+              value={rows}
               type="number"
+              style={{ width: "100%" }}
               onChange={(e) => {
                 const result = parseInt(e.target.value);
 
@@ -32,20 +35,14 @@ function App() {
           </div>
           <div>
             <textarea
+              style={{ width: "100%", minHeight: 200 }}
               onChange={(e) => {
-                try {
-                  const json = JSON.parse(e.target.value);
-                  setJsonData(json);
-                } catch (e) {
-                  console.log(e);
-                }
-
-                return;
+                setJsonData(e.target.value);
               }}
             ></textarea>
           </div>
         </div>
-        <div>
+        <div style={{ flexGrow: 2 }}>
           <label>Result: </label>
           <ErrorBoundary key={jsonData}>
             <TreeMap rows={rows} data={jsonData}></TreeMap>
