@@ -13,25 +13,9 @@ type Level = {
   items: TreeMapItem[];
 };
 
-// progressively grow the row width until it can fit all the items
-function calculateMaxWidth(
-  rows: number,
-  sorted: TreeMapItem[],
-  totalWidth: number,
-  carry?: number
-): number {
-  if (sorted.length == 1) {
-    return sorted[0].weight;
-  }
-
-  let maxWidth = sorted[0].weight;
-  const currentWidth = (carry ?? 0) + maxWidth;
-
-  if (currentWidth * rows < totalWidth && sorted.length > 1) {
-    maxWidth += calculateMaxWidth(rows, sorted.slice(1), totalWidth, currentWidth);
-  }
-
-  return maxWidth;
+// take as many rows as specified
+function calculateRowMaxWidth(rows: number, totalWidth: number): number {
+  return Math.floor(totalWidth / rows);
 }
 
 function getTreeMap(array: TreeMapItem[], rows: number) {
@@ -41,13 +25,13 @@ function getTreeMap(array: TreeMapItem[], rows: number) {
 
   const sorted = array.sort((a, b) => b.weight - a.weight);
   const totalWidth = sorted.reduce((result, item) => result + item.weight, 0);
-  const maxWidth = calculateMaxWidth(rows, sorted, totalWidth);
+  const rowMaxWidth = calculateRowMaxWidth(rows, totalWidth);
 
   const levels: Level[] = new Array(rows).fill(null).map((_, i) => {
     return {
       level: i,
-      maxWidth,
-      remainingWidth: maxWidth,
+      maxWidth: rowMaxWidth,
+      remainingWidth: rowMaxWidth,
       items: [],
     };
   });
