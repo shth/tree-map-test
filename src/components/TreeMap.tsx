@@ -55,8 +55,28 @@ function TreeMap(props: any) {
   // https://cgi.csc.liv.ac.uk/~epa/surveyhtml.html
   return (
     <div style={{ width: 800, height: 800, backgroundColor: "white", color: "black" }}>
-      Data: {props.data}
-      Row: {props.rows}
+      {getTreeMap(props.data, parseInt(props.rows)).map((level) => {
+        return (
+          <div style={{ display: "flex" }}>
+            {level.items.map((item) => {
+              return (
+                <div
+                  style={{
+                    textAlign: "center",
+                    width: `${(item.weight / level.maxWidth) * 100}%`,
+                    height: `${(1 / props.rows) * 100}%`,
+                    backgroundColor: item.value >= 0 ? "green" : "red",
+                    border: "solid 1px black",
+                  }}
+                >
+                  <div>{item.name}</div>
+                  <div>{`${item.value * 100}%`}</div>
+                </div>
+              );
+            })}
+          </div>
+        );
+      })}
     </div>
   );
 }
