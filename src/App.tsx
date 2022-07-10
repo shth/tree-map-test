@@ -12,10 +12,11 @@ function App() {
       <div className="tree-map-container">
         <div style={{ marginRight: 20 }}>
           <div>
-            <label>Row Number:</label>
+            <label htmlFor="rowNumber">Row Number:</label>
           </div>
           <div>
             <input
+              id="rowNumber"
               value={rows}
               type="number"
               style={{ width: "100%" }}
@@ -31,10 +32,11 @@ function App() {
             ></input>
           </div>
           <div>
-            <label>Data:</label>
+            <label htmlFor="data">Data:</label>
           </div>
           <div>
             <textarea
+              id="data"
               style={{ width: "100%", minHeight: 200 }}
               onChange={(e) => {
                 setJsonData(e.target.value);

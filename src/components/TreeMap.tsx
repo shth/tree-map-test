@@ -75,7 +75,7 @@ function getTreeMap(array: TreeMapItem[], rows: number) {
 
 function TreeMap(props: any) {
   return (
-    <div style={{ height: 800, backgroundColor: "white", color: "black" }}>
+    <div style={{ height: 800, backgroundColor: "white", color: "black" }} data-testid="treeMap">
       {getTreeMap(JSON.parse(props.data), parseInt(props.rows)).map((level) => {
         return (
           <div style={{ display: "flex" }}>
